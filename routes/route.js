@@ -24,7 +24,7 @@ router.get('/customer/:id', (req,res,next)=>{
 
 
 router.post('/customer', (req,res,next)=>{
-let newCustomer = new customers({
+var newCustomer = new customers({
 	customerName: req.body.customerName,
 	customerEmail: req.body.customerEmail,
 	customerPhone: req.body.customerPhone,
@@ -57,7 +57,7 @@ router.get('/event/:id', (req,res,next)=>{
 })
 
 router.post('/event', (req,res,next)=>{
-	let newEvent = new events({
+	var newEvent = new events({
 		eventName: req.body.eventName,
 		eventTagLine: req.body.eventTagLine,
 		eventImage: req.body.eventImage
@@ -86,7 +86,7 @@ router.get('/theme/:id', (req,res,next)=>{
 })
 
 router.post('/theme', (req,res,next)=>{
-	let newTheme = new themes({
+	var newTheme = new themes({
 		themeName: req.body.themeName,
 		themeImage: req.body.themeImage,
 		themeDetails: req.body.themeDetails,
@@ -109,7 +109,7 @@ newTheme.save((err, theme)=>{
 
 
 router.post('/myevent', (req,res,next)=>{
-	let newMyEvent = new myEvents({
+	var newMyEvent = new myEvents({
 	eventName:req.body.eventName,
 	eventDate:req.body.eventDate,
 	themeImage:req.body.themeImage,
