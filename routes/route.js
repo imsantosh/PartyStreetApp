@@ -42,16 +42,15 @@ newCustomer.save((err, customer)=>{
 });
 })
 
-
 //Api for events model
-
-router.get('/event/:id', (req,res,next)=>{
-	events.findOne({_id: req.params.id},(err, event)=>{
+//get all event list
+router.get('/event', (req,res,next)=>{
+	events.findOne({},(err, events)=>{
 		if(err){
 			res.json(err);
 		}
 		else{
-			res.json(event);
+			res.json(events);
 		}
 	});
 })
@@ -71,6 +70,10 @@ router.post('/event', (req,res,next)=>{
 	}
 	});
 })
+
+
+
+
 
 
 //api for themes
@@ -104,9 +107,6 @@ newTheme.save((err, theme)=>{
 })
 
 //api for my event
-
-
-
 
 router.post('/myevent', (req,res,next)=>{
 	var newMyEvent = new myEvents({

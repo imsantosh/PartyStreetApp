@@ -6,8 +6,7 @@ const eventSchema = mongoose.Schema({
 		required:true
 	},
 	eventTagLine:{
-		type:String,
-		required:true
+		type:String
 	},
 	eventImage:{
 		 type: String,
