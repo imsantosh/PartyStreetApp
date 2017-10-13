@@ -45,7 +45,7 @@ newCustomer.save((err, customer)=>{
 //Api for events model
 //get all event list
 router.get('/event', (req,res,next)=>{
-	events.findOne({},(err, events)=>{
+	events.find({},(err, events)=>{
 		if(err){
 			res.json(err);
 		}

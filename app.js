@@ -3,7 +3,7 @@ var cors = require('cors');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 var path = require('path');
-var port = 3000;
+var port = 9000;
 var q = require('q');
 //initialisation of app
 var app = express();
@@ -45,7 +45,7 @@ app.get('/', (req,res)=>{
 
 
 
-// app is running at port at 3000 in serverside
+// app is running at port at 9000 in serverside
 app.listen(port,(err)=>{
 	if(!err){
 	console.log('server is up and running at:'+port);
