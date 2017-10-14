@@ -29,7 +29,8 @@ app.use(cors());
 app.use(bodyParser.json());
 
 //static file should be in a sigle folder
-app.use(express.static(path.join(__dirname,'public')));
+//app.use(express.static(path.join(__dirname,'public')));
+app.use(express.static(path.join(__dirname,'images')));
 
 
 //Setting Route
