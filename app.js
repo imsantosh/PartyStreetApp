@@ -2,15 +2,18 @@ var express = require('express');
 var cors = require('cors');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
+var passport = require('passport');
 var path = require('path');
 var port = 9000;
 var q = require('q');
+var config = require('./config/database');
+
 //initialisation of app
 var app = express();
 
 // Data base connections.
 mongoose.Promise = require('q').Promise;
-mongoose.connect('mongodb://localhost:27017/partystreet');
+mongoose.connect(config.database);
 
 mongoose.connection.on('connnected',()=>{
 	console.log('Connected to mongodb database @27017');
@@ -24,6 +27,11 @@ mongoose.connection.on('error',(err)=>{
 
 //adding middleware cors
 app.use(cors());
+
+//passport middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require('./config/passport')(passport);
 
 // adding middleware body-parser
 app.use(bodyParser.json());

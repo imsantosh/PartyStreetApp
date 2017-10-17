@@ -1,6 +1,12 @@
 const express = require('express');
 const router = express.Router();
+const jwt = require('jsonwebtoken');
+const passport= require('passport');
+const config = require('../config/database');
+
+//add modeals here
 const customers = require('../models/customers');
+const viewer = require('../models/viewer');
 const events = require('../models/events');
 const myEvents = require('../models/myEvents');
 const themes = require('../models/themes');
@@ -22,25 +28,82 @@ router.get('/customer/:id', (req,res,next)=>{
 	});
 })
 
+router.get('/viewer/:id', (req, res)=>{
+	var query = { 'appUniqueId' : req.params.id };
+	viewer.findOne(query, (err, result)=>{
+		if(err){
+			res.json(err);
+		}else{
+			if(!result){
+				var newViewer = new viewer({
+				appUniqueId: req.params.id	
+				});
+			newViewer.save((err, result)=>{
+				if(err){
+					res.json('Error in add to app unique id');
+				}else{
+					res.json(result._id);
+				}
+			});
+			}else{
+			res.json(result._id);
+			}
+		}
+	});
+})
 
-router.post('/customer', (req,res,next)=>{
+router.post('/register', (req,res,next)=>{
 var newCustomer = new customers({
 	customerName: req.body.customerName,
 	customerEmail: req.body.customerEmail,
+	customerPassword: req.body.customerPassword,
 	customerPhone: req.body.customerPhone,
 	customerDob: req.body.customerDob,
 	customerCity: req.body.customerCity,
 	customerGender: req.body.customerGender
 });
-newCustomer.save((err, customer)=>{
+
+// addusers
+customers.addCustomer(newCustomer, (err, customer)=>{
 	if(err){
-		res.json({msg:'Fail to add customer'});
-	}
-	else{
-		res.json(customer);
+		res.json({success:false, msg:'Fail to add customer'});
+	}else{
+		res.json({success:true, msg:'Customer added suucessfully'});
 	}
 });
 })
+
+
+router.post('/authenticate', (req, res, next)=>{
+	const customerEmail= req.body.customerEmail;
+	const customerPassword= req.body.customerPassword;
+customers.getCustomerByEmail(customerEmail, (err, customer)=>{
+		if(err) throw err;
+		if(!customer){
+			return res.json({success:false, msg:'No customer found'});
+		}
+customers.comparePassword(customerPassword, customer.customerPassword, (err, isMatch)=>{
+if (err) throw err;
+if(isMatch){
+	const token= jwt.sign(customer, config.secret);//,{
+	//	expiresIn:604800//1 week
+	//});
+	res.json({
+		success:true,
+		token:'JWT '+token,
+		customer: {
+			customerEmail:customer.customerEmail,
+			customerName:customerName
+				}
+			});
+		}else{
+			return res.json({success:false, msg:'wrong password'});
+		}
+});			
+});	
+})
+
+
 
 //Api for events model
 //get all event list
@@ -128,10 +191,6 @@ newMyEvent.save((err, myevent)=>{
 	}
 });
 })
-
-
-
-
 
 
 
