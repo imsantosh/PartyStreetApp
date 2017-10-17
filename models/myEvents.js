@@ -1,33 +1,36 @@
 const mongoose= require('mongoose');
 
 const myEventSchema = mongoose.Schema({
-	eventName:{
+	viewerId:{
+		type:String,
+		required:true
+	},eventType:{
+		type:String,
+		required:true
+	},
+
+	eventType:{
+		type:String,
+		required:true
+	},
+	personName:{
 		type:String,
 		required:true
 	},
 	eventDate:{
-		type: Date, 
-		default: Date.now,
+		type: String, 
 		required:true
-	},
-	themeImage:{
-		type:String,
-		required:true
-	},
-	name:{
-		type:String,
 	},
 	repeatAlarm:{
 		type:Boolean,
 		required: true
 	},
-	notification:{
-		type:Boolean,
-		required: true
+	eventId:{
+		type:String,
+		required:true
 	},
-	sendSMS:{
-		type:Boolean,
-		required: true
+	phoneNumber:{
+		type:String,
 	}
 })
 

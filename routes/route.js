@@ -75,9 +75,11 @@ customers.addCustomer(newCustomer, (err, customer)=>{
 
 
 router.post('/authenticate', (req, res, next)=>{
-	const customerEmail= req.body.customerEmail;
-	const customerPassword= req.body.customerPassword;
+	var customerEmail= req.body.customerEmail;
+	console.log('email ',req.body)
+	var customerPassword= req.body.customerPassword;
 customers.getCustomerByEmail(customerEmail, (err, customer)=>{
+	//console.log('customer ', customer)
 		if(err) throw err;
 		if(!customer){
 			return res.json({success:false, msg:'No customer found'});
@@ -85,7 +87,8 @@ customers.getCustomerByEmail(customerEmail, (err, customer)=>{
 customers.comparePassword(customerPassword, customer.customerPassword, (err, isMatch)=>{
 if (err) throw err;
 if(isMatch){
-	const token= jwt.sign(customer, config.secret);//,{
+	console.log('customer baad wala', customer)
+	var token= jwt.sign(customer, config.secret);//,{
 	//	expiresIn:604800//1 week
 	//});
 	res.json({
@@ -93,7 +96,7 @@ if(isMatch){
 		token:'JWT '+token,
 		customer: {
 			customerEmail:customer.customerEmail,
-			customerName:customerName
+			customerName:customer.customerName
 				}
 			});
 		}else{
@@ -173,23 +176,35 @@ newTheme.save((err, theme)=>{
 
 router.post('/myevent', (req,res,next)=>{
 	var newMyEvent = new myEvents({
-	eventName:req.body.eventName,
+	viewerId: req.body.viewerId,
+	eventType:req.body.eventType,	
+	personName:req.body.personName,
 	eventDate:req.body.eventDate,
-	themeImage:req.body.themeImage,
-	name:req.body.name,
 	repeatAlarm:req.body.repeatAlarm,
-	notification:req.body.notification,
-	sendSMS:req.body.sendSMS
+	eventId:req.body.eventId,
+	phoneNumber: req.body.phoneNumber
 	});
 
 newMyEvent.save((err, myevent)=>{
 	if(err){
-		res.json({msg:'Fail to add your events'});
+		res.json({msg:'Fail to add your  your event'});
 	}
 	else{
 		res.json({msg:'Your Event added succesfully'});
 	}
 });
+})
+
+router.get('/myevent/:id', (req,res,next)=>{
+	var query = {viewerId:req.params.id};
+myEvents.find({query},(err, events)=>{
+		if(err){
+			res.json(err);
+		}
+		else{
+			res.json(events);
+		}
+	});
 })
 
 

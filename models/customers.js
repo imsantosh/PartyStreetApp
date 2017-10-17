@@ -42,7 +42,7 @@ module.exports.getCustomerById =function(id, callback){
 }
 
 module.exports.getCustomerByEmail =function(customerEmail, callback){
-	const query = {customerEmail:customerEmail};
+	var query = {customerEmail:customerEmail};
 	customers.findOne(query, callback);
 }
 
