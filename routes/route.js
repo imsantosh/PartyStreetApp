@@ -197,12 +197,12 @@ newMyEvent.save((err, myevent)=>{
 
 router.get('/myevent/:id', (req,res,next)=>{
 	var query = {viewerId:req.params.id};
-myEvents.find({query},(err, events)=>{
+myEvents.find(query, (err, events)=>{
 		if(err){
 			res.json(err);
 		}
 		if(!events){
-			res.json('There is no events  for you. Please add a event for your loved one !!');
+			res.json({msg:'There is no events  for you. Please add a event for your loved one !!'});
 		}
 		else{
 			res.json(events);
