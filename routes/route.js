@@ -201,6 +201,9 @@ myEvents.find({query},(err, events)=>{
 		if(err){
 			res.json(err);
 		}
+		if(!events){
+			res.json('There is no events  for you. Please add a event for your loved one !!');
+		}
 		else{
 			res.json(events);
 		}
