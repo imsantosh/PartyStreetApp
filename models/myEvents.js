@@ -4,11 +4,7 @@ const myEventSchema = mongoose.Schema({
 	viewerId:{
 		type:String,
 		required:true
-	},eventType:{
-		type:String,
-		required:true
 	},
-
 	eventType:{
 		type:String,
 		required:true
@@ -21,7 +17,7 @@ const myEventSchema = mongoose.Schema({
 		type: String, 
 		required:true
 	},
-	repeatAlarm:{
+	repeatYearly:{
 		type:Boolean,
 		required: true
 	},

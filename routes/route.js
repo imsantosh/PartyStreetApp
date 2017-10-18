@@ -42,11 +42,21 @@ router.get('/viewer/:id', (req, res)=>{
 				if(err){
 					res.json('Error in add to app unique id');
 				}else{
-					res.json(result._id);
+					var output = {
+						viewerId:result._id,
+						appVersion:1,
+						firstTimeUser:1
+					};
+					res.json(output);
 				}
 			});
 			}else{
-			res.json(result._id);
+				var output = {
+						viewerId:result._id,
+						appVersion:1,
+						firstTimeUser:0
+					};
+			res.json(output);
 			}
 		}
 	});
@@ -180,14 +190,13 @@ router.post('/myevent', (req,res,next)=>{
 	eventType:req.body.eventType,	
 	personName:req.body.personName,
 	eventDate:req.body.eventDate,
-	repeatAlarm:req.body.repeatAlarm,
+	repeatYearly:req.body.repeatYearly,
 	eventId:req.body.eventId,
 	phoneNumber: req.body.phoneNumber
 	});
-
 newMyEvent.save((err, myevent)=>{
 	if(err){
-		res.json({msg:'Fail to add your  your event'});
+		res.json({msg:'Fail to add your event'});
 	}
 	else{
 		res.json({msg:'Your Event added succesfully'});
