@@ -49,7 +49,7 @@ app.use('/api', route);
 
 // home page
 app.get('/', (req,res)=>{
-  res.send('Home page should be go here...');
+  res.send('Party Street Welcomes You !!');
 })
 
 

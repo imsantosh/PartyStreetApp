@@ -24,7 +24,7 @@ const customerSchema = mongoose.Schema({
 		type: Date, 
 		default: Date.now
 	},
-	customerCity:{
+	viewerId:{
 		type:String,
 		required:true
 	},

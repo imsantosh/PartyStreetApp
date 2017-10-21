@@ -10,7 +10,8 @@ const viewer = require('../models/viewer');
 const events = require('../models/events');
 const myEvents = require('../models/myEvents');
 const themes = require('../models/themes');
-
+const packages = require('../models/packages');
+const orders = require('../models/orders');
 
 //Api for customer model
 router.get('/customers', (req,res,next )=>{
@@ -24,6 +25,56 @@ router.get('/customer/:id', (req,res,next)=>{
 		}
 		else{
 			res.json(customer);
+		}
+	});
+})
+
+router.post('/package', (req, res)=>{
+var newPackage = new packages({
+	packageId: req.body.packageId,
+	packageName: req.body.packageName,
+	packageImageName: req.body.packageImageName,
+	packageOriginalPrice: req.body.packageOriginalPrice,
+	packageDiscountedPrice: req.body.packageDiscountedPrice,
+	eventId: req.body.eventId,
+	packageDescription: req.body.packageDescription
+}); 
+
+newPackage.save((err, package)=>{
+		if(err){
+		res.json({msg:'Fail to add package into db'});
+	}
+	else{
+		res.json({Msg:'packges added inot db'});
+	}
+	});
+})
+
+router.get('/package/:id', (req, res)=>{
+	var query = { 'eventId' : req.params.id };
+//var eventId: req.body.eventId;	
+	packages.find(query, (err, results)=>{
+		if (err){
+			res.json(err);
+		}
+		if(!results){
+			res.json({Msg:'There is no package with this Event id.'});
+		}else{
+			res.json(results);
+		}
+	});
+})
+
+router.post('/order', (req, res)=>{
+	var newOrder= new orders({
+		userId:req.body.userId,
+		packageId:req.body.packageId
+	});
+	newOrder.save((err, order)=>{
+		if(err){
+			res.json({msg:'Fail into order this package'});
+		}else{
+			res.json(order._id);
 		}
 	});
 })
@@ -69,7 +120,7 @@ var newCustomer = new customers({
 	customerPassword: req.body.customerPassword,
 	customerPhone: req.body.customerPhone,
 	customerDob: req.body.customerDob,
-	customerCity: req.body.customerCity,
+	viewerId: req.body.viewerId,
 	customerGender: req.body.customerGender
 });
 
@@ -86,7 +137,6 @@ customers.addCustomer(newCustomer, (err, customer)=>{
 
 router.post('/authenticate', (req, res, next)=>{
 	var customerEmail= req.body.customerEmail;
-	console.log('email ',req.body)
 	var customerPassword= req.body.customerPassword;
 customers.getCustomerByEmail(customerEmail, (err, customer)=>{
 	//console.log('customer ', customer)
@@ -97,17 +147,12 @@ customers.getCustomerByEmail(customerEmail, (err, customer)=>{
 customers.comparePassword(customerPassword, customer.customerPassword, (err, isMatch)=>{
 if (err) throw err;
 if(isMatch){
-	console.log('customer baad wala', customer)
 	var token= jwt.sign(customer, config.secret);//,{
 	//	expiresIn:604800//1 week
 	//});
 	res.json({
 		success:true,
-		token:'JWT '+token,
-		customer: {
-			customerEmail:customer.customerEmail,
-			customerName:customer.customerName
-				}
+		token:'JWT '+token
 			});
 		}else{
 			return res.json({success:false, msg:'wrong password'});
