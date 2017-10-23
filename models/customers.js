@@ -21,8 +21,8 @@ const customerSchema = mongoose.Schema({
 		required:true
 	},
 	customerDob:{
-		type: Date, 
-		default: Date.now
+		type: String,
+		required:true
 	},
 	viewerId:{
 		type:String,

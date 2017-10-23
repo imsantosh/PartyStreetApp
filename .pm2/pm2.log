@@ -1,0 +1,103 @@
+2017-10-20 08:02:18: ===============================================================================
+2017-10-20 08:02:18: --- New PM2 Daemon started ----------------------------------------------------
+2017-10-20 08:02:18: Time                 : Fri Oct 20 2017 08:02:18 GMT+0000 (UTC)
+2017-10-20 08:02:18: PM2 version          : 2.7.2
+2017-10-20 08:02:18: Node.js version      : 6.11.4
+2017-10-20 08:02:18: Current arch         : x64
+2017-10-20 08:02:18: PM2 home             : /home/ubuntu/PartyStreetApp/.pm2
+2017-10-20 08:02:18: PM2 PID file         : /home/ubuntu/PartyStreetApp/.pm2/pm2.pid
+2017-10-20 08:02:18: RPC socket file      : /home/ubuntu/PartyStreetApp/.pm2/rpc.sock
+2017-10-20 08:02:18: BUS socket file      : /home/ubuntu/PartyStreetApp/.pm2/pub.sock
+2017-10-20 08:02:18: Application log path : /home/ubuntu/PartyStreetApp/.pm2/logs
+2017-10-20 08:02:18: Process dump file    : /home/ubuntu/PartyStreetApp/.pm2/dump.pm2
+2017-10-20 08:02:18: Concurrent actions   : 2
+2017-10-20 08:02:18: SIGTERM timeout      : 1600
+2017-10-20 08:02:18: ===============================================================================
+2017-10-20 13:54:42: ===============================================================================
+2017-10-20 13:54:42: --- Stopping PM2 --------------------------------------------------------------
+2017-10-20 13:54:42: Time                 : Fri Oct 20 2017 13:54:42 GMT+0000 (UTC)
+2017-10-20 13:54:42: ===============================================================================
+2017-10-20 13:54:42: RPC closed
+2017-10-20 13:54:42: PUB closed
+2017-10-20 13:54:42: PM2 successfully stopped
+2017-10-20 13:55:14: ===============================================================================
+2017-10-20 13:55:14: --- New PM2 Daemon started ----------------------------------------------------
+2017-10-20 13:55:14: Time                 : Fri Oct 20 2017 13:55:14 GMT+0000 (UTC)
+2017-10-20 13:55:14: PM2 version          : 2.7.2
+2017-10-20 13:55:14: Node.js version      : 6.11.4
+2017-10-20 13:55:14: Current arch         : x64
+2017-10-20 13:55:14: PM2 home             : /home/ubuntu/PartyStreetApp/.pm2
+2017-10-20 13:55:14: PM2 PID file         : /home/ubuntu/PartyStreetApp/.pm2/pm2.pid
+2017-10-20 13:55:14: RPC socket file      : /home/ubuntu/PartyStreetApp/.pm2/rpc.sock
+2017-10-20 13:55:14: BUS socket file      : /home/ubuntu/PartyStreetApp/.pm2/pub.sock
+2017-10-20 13:55:14: Application log path : /home/ubuntu/PartyStreetApp/.pm2/logs
+2017-10-20 13:55:14: Process dump file    : /home/ubuntu/PartyStreetApp/.pm2/dump.pm2
+2017-10-20 13:55:14: Concurrent actions   : 2
+2017-10-20 13:55:14: SIGTERM timeout      : 1600
+2017-10-20 13:55:14: ===============================================================================
+2017-10-20 14:11:50: ===============================================================================
+2017-10-20 14:11:50: --- Stopping PM2 --------------------------------------------------------------
+2017-10-20 14:11:50: Time                 : Fri Oct 20 2017 14:11:50 GMT+0000 (UTC)
+2017-10-20 14:11:50: ===============================================================================
+2017-10-20 14:11:50: RPC closed
+2017-10-20 14:11:50: PUB closed
+2017-10-20 14:11:50: PM2 successfully stopped
+2017-10-20 14:12:23: ===============================================================================
+2017-10-20 14:12:23: --- New PM2 Daemon started ----------------------------------------------------
+2017-10-20 14:12:23: Time                 : Fri Oct 20 2017 14:12:23 GMT+0000 (UTC)
+2017-10-20 14:12:23: PM2 version          : 2.7.2
+2017-10-20 14:12:23: Node.js version      : 6.11.4
+2017-10-20 14:12:23: Current arch         : x64
+2017-10-20 14:12:23: PM2 home             : /home/ubuntu/PartyStreetApp/.pm2
+2017-10-20 14:12:23: PM2 PID file         : /home/ubuntu/PartyStreetApp/.pm2/pm2.pid
+2017-10-20 14:12:23: RPC socket file      : /home/ubuntu/PartyStreetApp/.pm2/rpc.sock
+2017-10-20 14:12:23: BUS socket file      : /home/ubuntu/PartyStreetApp/.pm2/pub.sock
+2017-10-20 14:12:23: Application log path : /home/ubuntu/PartyStreetApp/.pm2/logs
+2017-10-20 14:12:23: Process dump file    : /home/ubuntu/PartyStreetApp/.pm2/dump.pm2
+2017-10-20 14:12:23: Concurrent actions   : 2
+2017-10-20 14:12:23: SIGTERM timeout      : 1600
+2017-10-20 14:12:23: ===============================================================================
+2017-10-21 19:23:46: ===============================================================================
+2017-10-21 19:23:46: --- Stopping PM2 --------------------------------------------------------------
+2017-10-21 19:23:46: Time                 : Sat Oct 21 2017 19:23:46 GMT+0000 (UTC)
+2017-10-21 19:23:46: ===============================================================================
+2017-10-21 19:23:46: RPC closed
+2017-10-21 19:23:46: PUB closed
+2017-10-21 19:23:46: PM2 successfully stopped
+2017-10-21 19:24:24: ===============================================================================
+2017-10-21 19:24:24: --- New PM2 Daemon started ----------------------------------------------------
+2017-10-21 19:24:24: Time                 : Sat Oct 21 2017 19:24:24 GMT+0000 (UTC)
+2017-10-21 19:24:24: PM2 version          : 2.7.2
+2017-10-21 19:24:24: Node.js version      : 6.11.4
+2017-10-21 19:24:24: Current arch         : x64
+2017-10-21 19:24:24: PM2 home             : /home/ubuntu/PartyStreetApp/.pm2
+2017-10-21 19:24:24: PM2 PID file         : /home/ubuntu/PartyStreetApp/.pm2/pm2.pid
+2017-10-21 19:24:24: RPC socket file      : /home/ubuntu/PartyStreetApp/.pm2/rpc.sock
+2017-10-21 19:24:24: BUS socket file      : /home/ubuntu/PartyStreetApp/.pm2/pub.sock
+2017-10-21 19:24:24: Application log path : /home/ubuntu/PartyStreetApp/.pm2/logs
+2017-10-21 19:24:24: Process dump file    : /home/ubuntu/PartyStreetApp/.pm2/dump.pm2
+2017-10-21 19:24:24: Concurrent actions   : 2
+2017-10-21 19:24:24: SIGTERM timeout      : 1600
+2017-10-21 19:24:24: ===============================================================================
+2017-10-23 18:11:12: ===============================================================================
+2017-10-23 18:11:12: --- Stopping PM2 --------------------------------------------------------------
+2017-10-23 18:11:12: Time                 : Mon Oct 23 2017 18:11:12 GMT+0000 (UTC)
+2017-10-23 18:11:12: ===============================================================================
+2017-10-23 18:11:12: RPC closed
+2017-10-23 18:11:12: PUB closed
+2017-10-23 18:11:12: PM2 successfully stopped
+2017-10-23 18:11:43: ===============================================================================
+2017-10-23 18:11:43: --- New PM2 Daemon started ----------------------------------------------------
+2017-10-23 18:11:43: Time                 : Mon Oct 23 2017 18:11:43 GMT+0000 (UTC)
+2017-10-23 18:11:43: PM2 version          : 2.7.2
+2017-10-23 18:11:43: Node.js version      : 6.11.4
+2017-10-23 18:11:43: Current arch         : x64
+2017-10-23 18:11:43: PM2 home             : /home/ubuntu/PartyStreetApp/.pm2
+2017-10-23 18:11:43: PM2 PID file         : /home/ubuntu/PartyStreetApp/.pm2/pm2.pid
+2017-10-23 18:11:43: RPC socket file      : /home/ubuntu/PartyStreetApp/.pm2/rpc.sock
+2017-10-23 18:11:43: BUS socket file      : /home/ubuntu/PartyStreetApp/.pm2/pub.sock
+2017-10-23 18:11:43: Application log path : /home/ubuntu/PartyStreetApp/.pm2/logs
+2017-10-23 18:11:43: Process dump file    : /home/ubuntu/PartyStreetApp/.pm2/dump.pm2
+2017-10-23 18:11:43: Concurrent actions   : 2
+2017-10-23 18:11:43: SIGTERM timeout      : 1600
+2017-10-23 18:11:43: ===============================================================================
