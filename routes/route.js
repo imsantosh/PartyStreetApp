@@ -123,16 +123,27 @@ var newCustomer = new customers({
 	viewerId: req.body.viewerId,
 	customerGender: req.body.customerGender
 });
+	customers.findOne({customerEmail:req.body.customerEmail}, (err , result)=>{
+			if(err){
+				res.json({success:false, msg:'Fail to add customer'});
+			}
+			if(!result){
+			customers.addCustomer(newCustomer, (err, customer)=>{
+					if(err){
+						res.json({success:false, msg:'Fail to add customer'});
+					}else{
+						res.json({success:true, msg:'Customer added suucessfully'});
+					}
+				})
+			}else{
+				res.json({success:false, msg:'Email ID already exist.'})
+			}
 
-// addusers
-customers.addCustomer(newCustomer, (err, customer)=>{
-	if(err){
-		res.json({success:false, msg:'Fail to add customer'});
-	}else{
-		res.json({success:true, msg:'Customer added suucessfully'});
-	}
-});
+		})
 })
+
+
+
 
 
 router.post('/authenticate', (req, res, next)=>{
