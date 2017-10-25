@@ -65,10 +65,13 @@ router.get('/package/:id', (req, res)=>{
 	});
 })
 
+
+
 router.post('/order', (req, res)=>{
 	var newOrder= new orders({
 		userId:req.body.userId,
-		packageId:req.body.packageId
+		packageId:req.body.packageId,
+		orderAmount:req.body.orderAmount
 	});
 	newOrder.save((err, order)=>{
 		if(err){
@@ -79,6 +82,52 @@ router.post('/order', (req, res)=>{
 	});
 })
 
+router.get('/order/:userid', (req, res)=>{
+			var userId = req.params.userid;
+			var packageId = [];
+			var orderAmount = [];	
+	orders.find({userId}, (err, order)=>{
+			if(err){
+				res.json(err);
+			}
+			if(!order){
+				res.json('There is nothing to show you. Order now !!');
+			}else{
+				var orderList = [];
+				for (var i = order.length - 1; i >= 0; i--){
+						var packgesString = order[i].packageId;
+						var orderString = 	order[i].orderAmount;
+						packageId = packgesString.split("-");
+						orderAmount= orderString.split("-");
+						if(packageId.length == orderAmount.length){
+							for(var index = 0; index < packageId.length; index++) {
+									var packageid= packageId[index];
+									var amount = orderAmount[index];
+							        getPackageQuery(packageid, amount,function(res, updatedAmount){
+								     	   res["packageDiscountedPrice"] = updatedAmount	     	   
+								    	   orderList.push(res);
+								        });		
+							}
+						}
+					}
+					function getPackageQuery(packageid,amount, callback) {
+								       packages.findOne({packageId:packageid}, function(err, res) {
+								       	if (typeof callback === 'function') callback(res, amount)
+								       });
+								    }
+				//var orderData= JSON.stringify(orderList);
+				setTimeout(function(){
+					if(orderList.length !=0){
+					res.json(orderList);	
+					}else{
+						res.json('There is nothing to show you. Order now ');
+					}
+				}, 100)
+				}	
+	});
+});	
+
+					
 router.get('/viewer/:id', (req, res)=>{
 	var query = { 'appUniqueId' : req.params.id };
 	viewer.findOne(query, (err, result)=>{
@@ -142,10 +191,6 @@ var newCustomer = new customers({
 		})
 })
 
-
-
-
-
 router.post('/authenticate', (req, res, next)=>{
 	var customerEmail= req.body.customerEmail;
 	var customerPassword= req.body.customerPassword;
@@ -163,7 +208,8 @@ if(isMatch){
 	//});
 	res.json({
 		success:true,
-		token:'JWT '+token
+		token:'JWT '+token,
+		userId:customer._id
 			});
 		}else{
 			return res.json({success:false, msg:'wrong password'});
@@ -171,8 +217,6 @@ if(isMatch){
 });			
 });	
 })
-
-
 
 //Api for events model
 //get all event list

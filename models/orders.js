@@ -8,6 +8,10 @@ const orderSchema = mongoose.Schema({
 	packageId:{
 		type:String,
 		required:true
+	},
+	orderAmount:{
+		type:String,
+		required:true
 	}
 })
 
