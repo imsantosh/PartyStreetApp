@@ -8,7 +8,7 @@ const config = require('../config/database');
 //add modeals here
 const customers = require('../models/customers');
 const viewer = require('../models/viewer');
-const event = require('../models/events');
+const events = require('../models/events');
 const myEvents = require('../models/myEvents');
 const themes = require('../models/themes');
 const packages = require('../models/packages');
@@ -38,7 +38,7 @@ router.get('/customer/:id', (req, res, next) => {
 
 router.get('/event', (req, res)=>{
 
-event.find({}, (err, event)=>{
+events.find({}, (err, event)=>{
     if (err) {
         res.json({msg: 'Fail to add event'});
         } else {
@@ -49,12 +49,12 @@ event.find({}, (err, event)=>{
 
 
 router.post('/event', (req, res, next) => {
-    event.findOne().sort({_id: -1}).exec(function(err, result) {
+    events.findOne().sort({_id: -1}).exec(function(err, result) {
             if(err){
                     res.json(err);
                 }else{
                 var count= result.eventId;
-                var newEvent = new event({
+                var newEvent = new events({
                     eventName: req.body.eventName,
                     eventTagLine: req.body.eventTagLine,
                     eventImage: req.body.eventImage,
