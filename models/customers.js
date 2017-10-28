@@ -35,8 +35,6 @@ const customerSchema = mongoose.Schema({
 })
 
 const customers = module.exports = mongoose.model('customers', customerSchema); 
-
-
 module.exports.getCustomerById =function(id, callback){
 	customers.findById(id, callback);
 }

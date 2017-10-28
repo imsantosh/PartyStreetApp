@@ -26,8 +26,7 @@ const packageSchema = mongoose.Schema({
 		required:true
 	},
 	packageDescription:{
-		type:String,
-		required:true
+		type:String
 	}
 })
 

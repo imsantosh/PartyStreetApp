@@ -12,7 +12,19 @@ const orderSchema = mongoose.Schema({
 	orderAmount:{
 		type:String,
 		required:true
-	}
+	},
+	eventDate:{
+		type:String,
+		required:true
+	},
+	eventTime:{
+		type:String,
+		required:true
+	},
+	remark:{
+		type:String
+	},
+	
 })
 
 const orders = module.exports = mongoose.model('orders', orderSchema); 
