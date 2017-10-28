@@ -8,13 +8,14 @@ const config = require('../config/database');
 //add modeals here
 const customers = require('../models/customers');
 const viewer = require('../models/viewer');
-const events = require('../models/events');
+const event = require('../models/events');
 const myEvents = require('../models/myEvents');
 const themes = require('../models/themes');
 const packages = require('../models/packages');
 const orders = require('../models/orders');
 const address = require('../models/address');
 const feedback= require('../models/feedback');
+const test = require('../models/test');
 
 //Api for customer model
 router.get('/customers', (req, res, next) => {
@@ -35,6 +36,46 @@ router.get('/customer/:id', (req, res, next) => {
 
 
 
+router.get('/event', (req, res)=>{
+
+event.find({}, (err, event)=>{
+    if (err) {
+        res.json({msg: 'Fail to add event'});
+        } else {
+            res.json(event);
+        }
+});
+})
+
+
+router.post('/event', (req, res, next) => {
+    event.findOne().sort({_id: -1}).exec(function(err, result) {
+            if(err){
+                    res.json(err);
+                }else{
+                var count= result.eventId;
+                var newEvent = new event({
+                    eventName: req.body.eventName,
+                    eventTagLine: req.body.eventTagLine,
+                    eventImage: req.body.eventImage,
+                    eventId:count + 1
+                });
+                newEvent.save((err, event) => {
+                        if (err) {
+                            res.json({
+                                msg: 'Fail to add event'
+                            });
+                        } else {
+                            res.json(event);
+                        }
+                });
+                }
+    });   
+})
+
+
+
+
 router.get('/feedback', (req, res, next)=>{
     feedback.find([{},{$sort: { vote: 1 }},{ $limit : 5 } ], (err , feedbacks)=>{
         if(err){
@@ -44,6 +85,8 @@ router.get('/feedback', (req, res, next)=>{
         }
     });
 })
+
+
 
 
 router.post('/feedback', (req, res, next)=>{
@@ -366,18 +409,19 @@ router.post('/authenticate', (req, res, next) => {
 
 
 
-router.get('/event', (req, res, next) => {
+
+router.get('/event1', (req, res, next) => {
     events.find({_id:1}, (err, result) => {
         if (err) {
             res.json(err);
         } else {
             
-            res.json(result._id);
+            res.json({Mag:result._id});
         }
     });
 })
 
-router.post('/event', (req, res, next) => {
+router.post('/event1', (req, res, next) => {
     var newEvent = new events({
         eventName: req.body.eventName,
         eventTagLine: req.body.eventTagLine,
