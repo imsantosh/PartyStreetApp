@@ -38,13 +38,13 @@ router.get('/customer/:id', (req, res, next) => {
 
 router.get('/event', (req, res)=>{
 
-events.find({}, (err, event)=>{
+    events.find({}, (err, event)=>{
     if (err) {
         res.json({msg: 'Fail to add event'});
         } else {
             res.json(event);
         }
-});
+    });
 })
 
 
@@ -405,39 +405,6 @@ router.post('/authenticate', (req, res, next) => {
         });
     });
 })
-
-
-
-
-
-router.get('/event1', (req, res, next) => {
-    events.find({_id:1}, (err, result) => {
-        if (err) {
-            res.json(err);
-        } else {
-            
-            res.json({Mag:result._id});
-        }
-    });
-})
-
-router.post('/event1', (req, res, next) => {
-    var newEvent = new events({
-        eventName: req.body.eventName,
-        eventTagLine: req.body.eventTagLine,
-        eventImage: req.body.eventImage
-    });
-    newEvent.save((err, event) => {
-        if (err) {
-            res.json({
-                msg: 'Fail to add event'
-            });
-        } else {
-            res.json(event);
-        }
-    });
-})
-
 
 
 
