@@ -18,6 +18,7 @@ const eventSchema = mongoose.Schema({
 	},
 	active:{
 		type:Number,
+		default: 0,
 		required:true
 	}
 })
