@@ -58,7 +58,8 @@ router.post('/event', (req, res, next) => {
                     eventName: req.body.eventName,
                     eventTagLine: req.body.eventTagLine,
                     eventImage: req.body.eventImage,
-                    eventId:count + 1
+                    eventId:count + 1,
+                    activeEvent: req.body.activeEvent
                 });
                 newEvent.save((err, event) => {
                         if (err) {
