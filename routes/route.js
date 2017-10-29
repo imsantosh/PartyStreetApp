@@ -28,7 +28,10 @@ router.get('/customer/:id', (req, res, next) => {
     }, (err, customer) => {
         if (err) {
             res.json(err);
-        } else {
+        }
+        if(!customer){
+            res.json({Msg:'There is no details about your profile !!'});
+        }else {
             res.json(customer);
         }
     });
