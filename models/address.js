@@ -5,9 +5,39 @@ const addressSchema = mongoose.Schema({
 		type:String,
 		required: true
 	},
+	fullName:{
+		type:String,
+		required: true
+	},
+	phoneNumber:{
+		type:String,
+		required: true
+	},
+	alternateNumber:{
+		type:String
+	},
+	houseNumber:{
+		type:String
+	},
 	address:{
 		type:String,
 		required:true
+	},
+	landMark:{
+		type:String,
+		required: true
+	},
+	pincode:{
+		type:String,
+		required: true
+	},
+	city:{
+		type:String,
+		required: true
+	},
+	state:{
+		type:String,
+		required: true
 	},
 	addressNo:{
 		type:String,

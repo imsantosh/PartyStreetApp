@@ -21,10 +21,14 @@ const orderSchema = mongoose.Schema({
 		type:String,
 		required:true
 	},
+	addressNo:{
+		type:String,
+		required:true
+	},
 	remark:{
 		type:String
-	},
-	
+	}
+
 })
 
 const orders = module.exports = mongoose.model('orders', orderSchema); 

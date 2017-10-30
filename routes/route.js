@@ -133,39 +133,106 @@ router.post('/feedback', (req, res, next)=>{
 })
 
 
-
-
 router.post('/address', (req, res, next)=>{
-    
-    var newAddress = new address({
-         userId :req.body.userId,
-         address:req.body.address,
-         addressNo:req.body.addressNo
-    })
-    newAddress.save((err, order) => {
-        if (err) {
-            res.json({
-                msg: 'Fail into order this package'
-            });
-        } else {
-            res.json({Msg: 'Address has been saved successfully !!'});
-        }
-    });
+        address.find({userId:req.body.userId}).count().exec(function(err, counts) {
+            if(err){
+                console.log(err);
+                res.json(err);
+            }else{
+                var updatedAddressNo= counts;
+                var newAddress = new address({
+                         userId : req.body.userId,
+                         address: req.body.address,
+                         fullName: req.body.fullName,
+                         phoneNumber: req.body.phoneNumber,
+                         alternateNumber: req.body.alternateNumber,
+                         houseNumber: req.body.houseNumber,
+                         landMark: req.body.landMark,
+                         pincode: req.body.pincode,
+                         city: req.body.city,
+                         state: req.body.state,
+                         addressNo: updatedAddressNo +1
+                })        
+                console.log(newAddress);
+                newAddress.save((err, result) => {
+                    if (err) {
+                        res.json({
+                            msg: 'Fail into order this package'
+                        });
+                    } else {
+                        res.json({Addressno:result.addressNo});
+                    }
+                }); 
+            }
+        })   
 })
 
+
+/*
 router.get('/address/:userid', (req, res, next)=>{
     // fetch all the address from db
-    address.find({userId:req.params.userid}, (err, addresss)=>{
-        if (err || !addresss){
-            res.json({Msg:'There is no address, Please save an address !!'});
+    address.find({userId:req.params.userid}, (err, result)=>{
+        if (err){
+            res.json(err);
+        }
+        if(!result){
+            res.json({Msg:'There is no address saved ,Please an address for your order !!'});
         }else{
-            res.json(addresss);
+            res.json(result);
+        }
+    });
+})
+*/
+
+
+router.get('/address', (req, res, next)=>{
+    // fetch all the address from db
+    var userId= req.body.userId;
+    var addressNo= req.body.addressNo;
+
+    if(userId && addressNo){
+        address.find({ $and: [{userId: req.body.userId},{addressNo: req.body.addressNo}]}, (err, result)=>{
+            if (err || ! result){
+                res.json({Msg:'There is no address saved ,Please an address for your order !!'});
+            }else{
+                res.json(result);
+            }
+        });
+    }else{
+        if(userId){
+            address.find({userId:req.body.userId}, (err, result)=>{
+            if (err){
+                res.json(err);
+            }
+            if(!result){
+                res.json({Msg:'There is no address saved ,Please an address for your order !!'});
+            }else{
+                res.json(result);
+            }
+            });
+        }else{
+             res.json({Msg:'There is no address saved ,by this user id !!'});
+        }
+    }
+})
+
+
+/* address for particular userid and address number
+router.get('/address/:userid', (req, res, next)=>{
+    // fetch all the address from db
+    address.find({userId:req.params.userid}, (err, result)=>{
+        if (err){
+            res.json(err);
+        }
+        if(!result){
+            res.json({Msg:'There is no address saved ,Please an address for your order !!'});
+        }else{
+            res.json(result);
         }
     });
 })
 
-
-
+*/
 
 router.post('/package', (req, res) => {
     var newPackage = new packages({
@@ -216,7 +283,11 @@ router.post('/order', (req, res) => {
     var newOrder = new orders({
         userId: req.body.userId,
         packageId: req.body.packageId,
-        orderAmount: req.body.orderAmount
+        orderAmount: req.body.orderAmount,
+        eventDate:req.body.eventDate,
+        eventTime:req.body.eventTime,
+        addressNo:req.body.addressNo,
+        remark:req.body.remark
     });
     newOrder.save((err, order) => {
         if (err) {
@@ -224,7 +295,7 @@ router.post('/order', (req, res) => {
                 msg: 'Fail into order this package'
             });
         } else {
-            res.json(order._id);
+            res.json({OrderNumber:order._id});
         }
     });
 })
