@@ -201,14 +201,14 @@ router.get('/address', (req, res, next)=>{
     }else{
         if(userId){
             address.find({userId:req.body.userId}, (err, result)=>{
-            if (err){
-                res.json(err);
-            }
-            if(!result){
-                res.json({Msg:'There is no address saved ,Please an address for your order !!'});
-            }else{
-                res.json(result);
-            }
+                if (err){
+                    res.json(err);
+                }
+                if(!result){
+                    res.json({Msg:'There is no address saved ,Please an address for your order !!'});
+                }else{
+                    res.json(result);
+                }
             });
         }else{
              res.json({Msg:'There is no address saved ,by this user id !!'});
