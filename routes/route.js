@@ -185,11 +185,13 @@ router.get('/address/:userid', (req, res, next)=>{
 */
 
 
-router.get('/address', (req, res, next)=>{
+router.get('/address/:userid', (req, res, next)=>{
     // fetch all the address from db
-    var userId= req.body.userId;
-    var addressNo= req.body.addressNo;
+    var userId= req.params.userid;
+    //var addressNo= req.body.addressNo;
 
+
+/*
     if(userId && addressNo){
         address.find({ $and: [{userId: req.body.userId},{addressNo: req.body.addressNo}]}, (err, result)=>{
             if (err || ! result){
@@ -199,8 +201,11 @@ router.get('/address', (req, res, next)=>{
             }
         });
     }else{
+
+
+  */      
         if(userId){
-            address.find({userId:req.body.userId}, (err, result)=>{
+            address.find({userId:req.params.userid}, (err, result)=>{
                 if (err){
                     res.json(err);
                 }
@@ -210,10 +215,13 @@ router.get('/address', (req, res, next)=>{
                     res.json(result);
                 }
             });
+
+        /*    
         }else{
              res.json({Msg:'There is no address saved ,by this user id !!'});
-        }
+        }*/
     }
+
 })
 
 
@@ -344,9 +352,6 @@ router.get('/order/:userid', (req, res) => {
                 }   
     });
 });
-
-
-
 
 
 router.get('/viewer/:id', (req, res) => {
