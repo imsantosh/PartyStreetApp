@@ -136,7 +136,6 @@ router.post('/feedback', (req, res, next)=>{
 router.post('/address', (req, res, next)=>{
         address.find({userId:req.body.userId}).count().exec(function(err, counts) {
             if(err){
-                console.log(err);
                 res.json(err);
             }else{
                 var updatedAddressNo= counts;
@@ -152,19 +151,19 @@ router.post('/address', (req, res, next)=>{
                          city: req.body.city,
                          state: req.body.state,
                          addressNo: updatedAddressNo +1
-                })        
-                console.log(newAddress);
+                });        
+                console.log('data before entring',newAddress);
                 newAddress.save((err, result) => {
                     if (err) {
                         res.json({
-                            msg: 'Fail into order this package'
+                            msg: 'Something went wrong to order this packges!! Please try again.'
                         });
                     } else {
                         res.json({Addressno:result.addressNo});
                     }
                 }); 
             }
-        })   
+        });   
 })
 
 
@@ -186,10 +185,9 @@ router.get('/address/:userid', (req, res, next)=>{
 
 
 router.get('/address/:userid', (req, res, next)=>{
-    // fetch all the address from db
+    
     var userId= req.params.userid;
-    //var addressNo= req.body.addressNo;
-
+    
 
 /*
     if(userId && addressNo){
@@ -215,12 +213,7 @@ router.get('/address/:userid', (req, res, next)=>{
                     res.json(result);
                 }
             });
-
-        /*    
-        }else{
-             res.json({Msg:'There is no address saved ,by this user id !!'});
-        }*/
-    }
+        }
 
 })
 
