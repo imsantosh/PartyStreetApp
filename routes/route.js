@@ -543,6 +543,23 @@ router.get('/myevent/:id', (req, res, next) => {
     var query = {
         viewerId: req.params.id
     };
+
+myEvents.find(query).sort({eventDate: 1}).exec(function(err, events) {
+    if (err) {
+            res.json(err);
+        }
+        if (!events) {
+            res.json({
+                msg: 'There is no events  for you. Please add a event for your loved one !!'
+            });
+        } else {
+            res.json(events);
+        }
+});
+
+})
+
+/*
     myEvents.find(query, (err, events) => {
         if (err) {
             res.json(err);
@@ -555,7 +572,8 @@ router.get('/myevent/:id', (req, res, next) => {
             res.json(events);
         }
     });
-})
+
+    */
 
 
 
