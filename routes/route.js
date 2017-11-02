@@ -152,7 +152,7 @@ router.post('/address', (req, res, next)=>{
                          state: req.body.state,
                          addressNo: updatedAddressNo +1
                 });        
-                console.log('data before entring',newAddress);
+             
                 newAddress.save((err, result) => {
                     if (err) {
                         res.json({
