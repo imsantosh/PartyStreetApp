@@ -17,6 +17,9 @@ const address = require('../models/address');
 const feedback= require('../models/feedback');
 const test = require('../models/test');
 
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
 //Api for customer model
 router.get('/customers', (req, res, next) => {
     res.send('All customers should be display here...');
@@ -559,21 +562,71 @@ myEvents.find(query).sort({eventDate: 1}).exec(function(err, events) {
 
 })
 
-/*
-    myEvents.find(query, (err, events) => {
-        if (err) {
-            res.json(err);
-        }
-        if (!events) {
-            res.json({
-                msg: 'There is no events  for you. Please add a event for your loved one !!'
-            });
-        } else {
-            res.json(events);
-        }
-    });
 
-    */
+
+//send mail 
+
+router.post('/sendmail', (req, res, next) => {
+//var mailer = require("nodemailer");
+
+var fullName= req.body.fullName;
+var phoneNumber=req.body.phoneNumber;
+var output = `
+<h3>Order Details</h3>
+<ul>
+    <li>Full Name: ${req.body.fullName}</li>
+    <li>Contact Number: ${req.body.phoneNumber}</li>
+    <li>Alternate contact Number: ${req.body.alternateNumber}</li>
+    <li>Event Date: ${req.body.eventDate}</li>
+    <li>Event Time: ${req.body.eventTime}</li>
+    <li>Package id: ${req.body.packageId}</li>
+    <li>Amount: ${req.body.orderAmount}</li>
+    <li>Remark: ${req.body.remark}</li>
+    <li>house Number: ${req.body.houseNumber}</li>
+    <li>Address: ${req.body.address}</li>
+    <li>lanmark: ${req.body.landMark}</li>
+    <li>pincode: ${req.body.pincode}</li>
+    <li>City: ${req.body.city}</li>
+    <li>State: ${req.body.state}</li>
+</ul>
+`;
+
+
+var nodemailer = require('nodemailer');
+var smtpTransport = require('nodemailer-smtp-transport');
+
+var transporter = nodemailer.createTransport(smtpTransport({
+  service: 'gmail',
+  host: 'smtp.gmail.com',
+  auth: {
+    user: 'partystreet.in@gmail.com',
+    pass: 'partystreet@2'
+  }
+}));
+
+var mailOptions = {
+  from: 'partystreet.in@gmail.com',
+  to: 'sspmediaeducation@gmail.com, omagrahari5@gmail.com',
+  subject: 'New Order From ' + fullName + ', Contact number:- '+phoneNumber ,
+  text: 'Hello Party street !!',
+  html:output
+};
+
+transporter.sendMail(mailOptions, function(error, info){
+  if (error) {
+    res.json(error);
+  } else {
+    //console.log('Email sent: ' + info.response);
+    res.json({msg: 'Thank you so much !! , We have received your query and one of our sales executive will contact you very soon for further discussion, Thanks !!'});
+  }
+}); 
+    
+});  
+
+
+
+
+
 
 
 
